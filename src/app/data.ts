@@ -1,0 +1,201 @@
+export const data = {
+  work: [
+    {
+      "company": "腾讯 - 微信事业群",
+      "href": "https://www.tencent.com",
+      "badges": [],
+      "title": "高级前端开发工程师",
+      "logoUrl": "/portfolio/tencent.png",
+      "start": "2020.07",
+      "description": "负责微信小程序开放平台核心工具链的前端架构设计与开发，主导实现基于 Vite + React 18 + TypeScript 的 Monorepo 工程体系，支撑日均千万级开发者使用。"
+    },
+    {
+      "company": "字节跳动 - 抖音电商",
+      "href": "https://www.bytedance.com",
+      "badges": [],
+      "title": "前端技术专家",
+      "logoUrl": "/portfolio/bytedance.png",
+      "start": "2019.05",
+      "end": "2023.02",
+      "description": "主导抖音电商商家后台系统的前端微服务化改造，基于 React 18 + Module Federation 实现跨团队模块联邦，系统 QPS 提升 300%，页面加载性能优化 40%。"
+    },
+    {
+      "company": "蚂蚁集团 - 数字科技事业部",
+      "href": "https://www.antgroup.com",
+      "badges": [],
+      "title": "前端架构师",
+      "logoUrl": "/portfolio/antgroup.png",
+      "start": "2018.09",
+      "end": "2022.11",
+      "description": "负责蚂蚁链 BaaS 平台前端中台体系建设，设计并落地了跨产品线的低代码搭建方案，基于 Vue 3 + TypeScript 的插件化架构，提升产研效率 60% 以上。"
+    },
+    {
+      "company": "美团 - 到店事业群",
+      "href": "https://www.meituan.com",
+      "badges": [],
+      "title": "资深前端工程师",
+      "logoUrl": "/portfolio/meituan.png",
+      "start": "2017.03",
+      "end": "2021.06",
+      "description": "主导美团商家CRM系统重写与性能优化，采用微前端 + Web Worker 技术方案，实现复杂业务模块的隔离与并行计算，系统响应时间降低 65%。"
+    },
+    {
+      "company": "百度 - 智能云事业群",
+      "href": "https://www.baidu.com",
+      "badges": [],
+      "title": "前端技术负责人",
+      "logoUrl": "/portfolio/baidu.png",
+      "start": "2015.11",
+      "end": "2019.08",
+      "description": "负责百度云控制台全线产品前端技术体系构建，主导从 AngularJS 到 Vue 2 的技术栈迁移，设计统一物料库与 CLI 工具链，支撑 50+ 云产品快速迭代。"
+    }
+  ],
+  education: [
+    {
+      school: "浙江大学",
+      href: "https://www.zju.edu.cn",
+      degree: "工学学士 (B.Eng.)",
+      logoUrl: "/portfolio/zju.png",
+      start: "2013.09",
+      end: "2017.06",
+    },
+    {
+      school: "华东师范大学",
+      href: "https://www.ecnu.edu.cn",
+      degree: "工程硕士 (M.Eng.)",
+      logoUrl: "/portfolio/ecnu.png",
+      start: "2017.09",
+      end: "2020.06",
+    },
+    {
+      school: "加州大学伯克利分校",
+      href: "https://www.berkeley.edu",
+      degree: "工程硕士 (M.Eng.)",
+      logoUrl: "/portfolio/berkeley.svg",
+      start: "2018.07",
+      end: "2020.08",
+    },
+    {
+      "school": "北京大学",
+      "href": "https://www.pku.edu.cn",
+      "degree": "理学学士 (B.S.)",
+      "logoUrl": "/portfolio/pku.png",
+      "start": "2020.09",
+      "end": "2024.06"
+    },
+  ],
+  skills: [
+    { src: "https://cdn.simpleicons.org/nextdotjs", alt: "Next.js", href: "https://nextjs.org" },
+    { src: "https://cdn.simpleicons.org/nuxt", alt: "Nuxt.js", href: "https://nuxt.com" },
+    { src: "https://cdn.simpleicons.org/react", alt: "React.js", href: "https://react.dev" },
+    { src: "https://cdn.simpleicons.org/vuedotjs", alt: "Vue.js", href: "https://vuejs.org" },
+    { src: "https://cdn.simpleicons.org/nestjs", alt: "Nest.js", href: "https://nestjs.com" },
+    { src: "https://cdn.simpleicons.org/typescript", alt: "Typescript", href: "https://www.typescriptlang.org" },
+    { src: "https://cdn.simpleicons.org/javascript", alt: "Javascript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { src: "https://cdn.simpleicons.org/html5", alt: "Html5", href: "http://html5.com" },
+    { src: "https://cdn.simpleicons.org/prisma", alt: "Prisma", href: "https://prisma.yoga" },
+    { src: "https://cdn.simpleicons.org/postgresql", alt: "Postgresql", href: "https://www.postgresql.org" },
+    { src: "https://cdn.simpleicons.org/vercel", alt: "vercel", href: "https://www.vercel.COM" },
+  ],
+  projects: [
+    {
+      title: "谜叶象限",
+      href: "https://baiwumm.com",
+      description: "每一片叶子，都是未完成的坐标系,架构于 Halo 及增强体验的 THYUU/星度主题。",
+      tags: ["Halo", "Thyuu", "星度"],
+      video: "/portfolio/www.mp4"
+    },
+    {
+      title: "Vue3 Admin",
+      href: "https://vue3.baiwumm.com",
+      description: "前端基于 Soybean Admin二次开发，后端基于 Nest.js + Prisma 的全栈后台应用。",
+      tags: [
+        "Vue.js",
+        "Nest.js",
+        "PostgreSQL",
+        "Prisma",
+        "Vite.js",
+        "Ant Design Vue"
+      ],
+      repo: "vue3-admin",
+      video: "/portfolio/vue3-admin.mp4"
+    },
+    {
+      title: "Dream Site",
+      href: "https://dream.baiwumm.com",
+      description: "一个现代化的个人站点导航系统，旨在为用户提供美观、高效的个人网站收藏与管理体验。无论你是开发者、设计师还是内容创作者，都可以用它来组织和展示你喜爱的网站资源。",
+      tags: [
+        "Next.js",
+        "Supabase",
+        "Tailwindcss",
+        "Motion",
+      ],
+      repo: "dream-site",
+      video: "/portfolio/dream-site.mp4"
+    },
+    {
+      title: "今日热榜",
+      href: "https://hot.baiwumm.com",
+      description: "一个基于 Next.js 构建的现代化热点聚合平台，实时汇聚各大主流网站的热门内容，为用户提供一站式的热点资讯浏览体验。",
+      tags: [
+        "Next.js",
+        "React.js",
+        "HeroUI",
+        "Tailwindcss",
+      ],
+      repo: "next-daily-hot",
+      video: "/portfolio/daily-hot.mp4"
+    },
+    {
+      title: "Easy Api",
+      href: "https://api.baiwumm.com",
+      description: "一个基于 Nuxt 4 构建的简单易用的 API 服务平台，提供多种实用的 API 接口和管理后台。",
+      tags: [
+        "Nuxt.js",
+        "Supabase",
+        "Tailwindcss",
+        "Nuxt UI"
+      ],
+      video: "/portfolio/easy-api.mp4"
+    },
+    {
+      title: "Cover Magic",
+      href: "https://cover.baiwumm.com",
+      description: "一款专业的封面设计工具，支持实时预览和高质量导出，帮助您轻松创建精美的封面图像。",
+      tags: [
+        "Vue.js",
+        "Native UI",
+        "Tailwindcss",
+        "Vite.js"
+      ],
+      repo: "cover-magic",
+      video: "/portfolio/cover-magic.mp4"
+    },
+    {
+      title: "UptimeKeeper",
+      href: "https://monitor.baiwumm.com",
+      description: "基于 Next.js 构建的 UptimeRobot API 站点监控平台，实时监测网站运行状态，提供可视化报表与提醒功能，帮助你快速掌握服务可用性与性能健康状况。",
+      tags: [
+        "React.js",
+        "Next.js",
+        "Tailwindcss",
+        "Motion"
+      ],
+      repo: "UptimeKeeper",
+      video: "/portfolio/uptime-keeper.mp4"
+    },
+    {
+      title: "WeSplit",
+      href: "https://split.baiwumm.com",
+      description: "让聚餐、旅行、聚会的费用分摊变得简单透明，自动计算最优转账方案，告别复杂的账目计算。",
+      tags: [
+        "React.js",
+        "Vite.js",
+        "Tailwindcss",
+        "Zustand"
+      ],
+      repo: "WeSplit",
+      video: "/portfolio/we-split.mp4"
+    },
+  ]
+}
