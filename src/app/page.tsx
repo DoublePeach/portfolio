@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useRequest } from 'ahooks';
 import { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ import { SECTION } from '@/enums';
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const BLUR_FADE_DELAY = 0.04;
-  const name = process.env.NEXT_PUBLIC_NAME!;
+  const name = process.env.NEXT_PUBLIC_NAME ?? "";
   // 获取文章
   const { data: posts = [], loading: postLoading } = useRequest(async () => {
     const res = await fetch('/api/halo/posts?page=1&size=5&publishPhase=PUBLISHED', {
@@ -54,13 +54,13 @@ export default function Home() {
             />
             <BlurText
               className="max-w-150 md:text-lg"
-              text={process.env.NEXT_PUBLIC_DESC!}
+              text={process.env.NEXT_PUBLIC_DESC ?? ""}
             />
           </div>
           <BlurFade delay={BLUR_FADE_DELAY}>
             <Avatar className="size-28">
               <AvatarImage alt={name} src='/me.jpg' />
-              <AvatarFallback>{name.slice(0, 2)}</AvatarFallback>
+              <AvatarFallback>{name.slice(0, 2) || "??"}</AvatarFallback>
             </Avatar>
           </BlurFade>
         </div>
