@@ -5,6 +5,7 @@ import Link from "next/link";
 import { RippleButton } from "@/components/animate-ui/components/buttons/ripple";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 import pkg from "#/package.json";
 
@@ -51,7 +52,7 @@ export default function ProjectCard({
       >
         {video ? (
           <video
-            src={video}
+            src={withBasePath(video)}
             autoPlay
             loop
             muted
@@ -62,7 +63,7 @@ export default function ProjectCard({
         {!video && image ? (
           <div className="relative h-44 w-full bg-muted">
             <Image
-              src={image}
+              src={withBasePath(image)}
               alt={title}
               fill
               className="object-cover object-center transition-transform duration-300 ease-out hover:scale-105"

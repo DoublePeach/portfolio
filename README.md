@@ -9,9 +9,9 @@ pnpm install
 pnpm dev
 ```
 
-浏览器访问 [http://localhost:5173/portfolio](http://localhost:5173/portfolio)。
+浏览器访问 [http://localhost:5173](http://localhost:5173)。
 
-> 本项目配置了 `basePath: /portfolio`，本地与线上均通过 `/portfolio` 子路径访问。
+> `public` 下的图片等静态资源统一放在 `public/portfolio/`，访问路径为 `/portfolio/...`（不影响页面路由）。
 
 ## 环境变量
 

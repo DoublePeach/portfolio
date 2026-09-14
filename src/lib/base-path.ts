@@ -1,13 +1,13 @@
 /**
- * 站点部署子路径（需与 next.config.ts 中 basePath 保持一致）
- * 注意：Next.js basePath 不能以斜杠结尾
+ * public 静态资源访问前缀（仅作用于图片/视频等静态文件，不影响页面路由）
+ * 对应目录：public/portfolio/
  */
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "/portfolio";
+export const STATIC_ASSET_PREFIX = "/portfolio";
 
 /**
- * 为 public 静态资源路径补上 basePath 前缀
- * @param assetPath 以 / 开头的站点内路径，或完整 http(s) URL
- * @returns 带 basePath 的可访问路径
+ * 为 public 静态资源路径补上 /portfolio 前缀
+ * @param assetPath 以 / 开头的站点内资源路径，或完整 http(s) URL
+ * @returns 可访问的静态资源路径
  */
 export function withBasePath(assetPath: string): string {
   if (!assetPath) {
@@ -19,13 +19,9 @@ export function withBasePath(assetPath: string): string {
   }
 
   const normalizedPath = assetPath.startsWith("/") ? assetPath : `/${assetPath}`;
-  if (!BASE_PATH || BASE_PATH === "/") {
+  if (normalizedPath === STATIC_ASSET_PREFIX || normalizedPath.startsWith(`${STATIC_ASSET_PREFIX}/`)) {
     return normalizedPath;
   }
 
-  if (normalizedPath === BASE_PATH || normalizedPath.startsWith(`${BASE_PATH}/`)) {
-    return normalizedPath;
-  }
-
-  return `${BASE_PATH}${normalizedPath}`;
+  return `${STATIC_ASSET_PREFIX}${normalizedPath}`;
 }

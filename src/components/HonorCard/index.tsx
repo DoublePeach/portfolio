@@ -6,6 +6,7 @@ import { type FC } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { HonorItem } from "@/data/honors";
+import { withBasePath } from "@/lib/base-path";
 
 type HonorCardProps = {
   /** 荣誉条目 */
@@ -21,13 +22,13 @@ const HonorCard: FC<HonorCardProps> = ({ honor }) => {
     <Card className="overflow-hidden border hover:shadow-lg transition-all duration-300 gap-0 py-0 h-full">
       {honor.image ? (
         <div className="relative w-full aspect-[4/3] bg-muted">
-          <Image
-            src={honor.image}
-            alt={honor.title}
-            fill
-            className="object-contain p-2"
-            sizes="(max-width: 768px) 100vw, 40vw"
-          />
+            <Image
+              src={withBasePath(honor.image)}
+              alt={honor.title}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
         </div>
       ) : null}
       <CardHeader className="gap-2 px-4 py-3">

@@ -12,14 +12,13 @@ import HonorsDialog from '@/components/HonorsDialog';
 import { HonorsDialogProvider } from '@/components/HonorsDialog/context';
 import ScrollProgress from '@/components/ScrollProgress';
 import { THEME_MODE } from "@/enums";
-import { BASE_PATH } from "@/lib/base-path";
+import { withBasePath } from "@/lib/base-path";
 import pkg from "#/package.json";
 
 const siteName = process.env.NEXT_PUBLIC_NAME ?? "";
 const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Portfolio";
 const siteDescription = process.env.NEXT_PUBLIC_DESC ?? "";
-const siteDomain = process.env.NEXT_PUBLIC_APP_DOMAIN ?? "http://localhost:5173";
-const siteUrl = `${siteDomain.replace(/\/$/, "")}${BASE_PATH}`;
+const siteDomain = (process.env.NEXT_PUBLIC_APP_DOMAIN ?? "http://localhost:5173").replace(/\/$/, "");
 const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? pkg.author.github;
 
 export const metadata: Metadata = {
@@ -40,11 +39,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteName,
     description: siteDescription,
-    url: siteUrl,
+    url: siteDomain,
     siteName: siteName,
     images: [
       {
-        url: `${siteUrl}/og.svg`,
+        url: `${siteDomain}${withBasePath("/og.svg")}`,
         width: 1200,
         height: 630,
       }
@@ -57,9 +56,9 @@ export const metadata: Metadata = {
     title: siteName,
     description: siteDescription,
     creator: githubUsername,
-    images: [`${siteUrl}/og.svg`],
+    images: [`${siteDomain}${withBasePath("/og.svg")}`],
   },
-  manifest: `${siteUrl}/manifest.json`
+  manifest: `${siteDomain}/manifest.json`
 };
 
 export default function RootLayout({
