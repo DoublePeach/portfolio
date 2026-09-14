@@ -4,6 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Avatar as AvatarPrimitive } from 'radix-ui';
 import * as React from 'react';
 
+import { withBasePath } from '@/lib/base-path';
 import { cn } from '@/lib/utils';
 
 const avatarStatusVariants = cva('flex items-center rounded-full size-2 border-2 border-background', {
@@ -26,10 +27,17 @@ function Avatar({ className, ...props }: React.ComponentProps<typeof AvatarPrimi
   );
 }
 
-function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+function AvatarImage({ className, src, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+  const resolvedSrc = typeof src === 'string' ? withBasePath(src) : src;
+
   return (
     <div className={cn('relative overflow-hidden rounded-full', className)}>
-      <AvatarPrimitive.Image data-slot="avatar-image" className={cn('aspect-square h-full w-full')} {...props} />
+      <AvatarPrimitive.Image
+        data-slot="avatar-image"
+        className={cn('aspect-square h-full w-full')}
+        src={resolvedSrc}
+        {...props}
+      />
     </div>
   );
 }

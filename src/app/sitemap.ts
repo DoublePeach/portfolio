@@ -1,12 +1,15 @@
 import type { MetadataRoute } from 'next'
 
-/** 生成站点 sitemap */
+import { BASE_PATH } from '@/lib/base-path'
+
+/** 生成站点 sitemap（含 basePath） */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || 'http://localhost:5173'
+  const siteDomain = (process.env.NEXT_PUBLIC_APP_DOMAIN || 'http://localhost:5173').replace(/\/$/, '')
+  const siteUrl = `${siteDomain}${BASE_PATH}`
 
   return [
     {
-      url: siteDomain,
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
