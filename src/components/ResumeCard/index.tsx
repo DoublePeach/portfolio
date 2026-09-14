@@ -19,6 +19,10 @@ interface ResumeCardProps {
   period: string;
   description?: string;
 }
+
+/**
+ * 简历时间线条目卡片：公司/学校 Logo + 标题 + 可展开描述
+ */
 const ResumeCard: React.FC<ResumeCardProps> = ({
   logoUrl,
   altText,
@@ -44,35 +48,36 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
       className="block cursor-pointer"
       onClick={handleClick}
       target="_blank"
+      rel="noopener noreferrer"
     >
       <div className="flex">
         <div className="flex-none">
-          <Avatar className="size-10 m-auto bg-muted-background dark:bg-foreground">
+          <Avatar className="size-12 m-auto bg-white border border-border/60 shadow-sm dark:bg-white">
             <AvatarImage
               src={logoUrl}
               alt={altText}
-              className="object-contain"
+              className="object-contain p-1.5"
             />
-            <AvatarFallback>{altText[0]}</AvatarFallback>
+            <AvatarFallback className="text-xs bg-muted">{altText.slice(0, 2)}</AvatarFallback>
           </Avatar>
         </div>
         <div className="grow ml-4 items-center flex-col group">
           <div className="flex items-center justify-between gap-x-2 text-base">
-            <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
+            <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm gap-1 flex-wrap">
               {title}
-              {badges && (
+              {badges && badges.length > 0 ? (
                 <span className="inline-flex gap-x-1">
-                  {badges.map((badge, index) => (
+                  {badges.map((badgeLabel, badgeIndex) => (
                     <Badge
                       variant="secondary"
                       className="align-middle text-xs"
-                      key={index}
+                      key={`${badgeLabel}-${badgeIndex}`}
                     >
-                      {badge}
+                      {badgeLabel}
                     </Badge>
                   ))}
                 </span>
-              )}
+              ) : null}
               <ChevronRightIcon
                 className={cn(
                   "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
@@ -80,31 +85,31 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
                 )}
               />
             </h3>
-            <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
+            <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right shrink-0">
               {period}
             </div>
           </div>
-          {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
-          {description && (
+          {subtitle ? <div className="font-sans text-xs mt-1">{subtitle}</div> : null}
+          {description ? (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: isExpanded ? 1 : 0,
-
                 height: isExpanded ? "auto" : 0,
               }}
               transition={{
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-2 text-xs sm:text-sm"
+              className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line"
             >
               {description}
             </motion.div>
-          )}
+          ) : null}
         </div>
       </div>
     </Link>
   );
 };
+
 export default ResumeCard;

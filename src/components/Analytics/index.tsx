@@ -14,9 +14,12 @@ import { useEffect } from 'react';
  * @description: Umami 统计代码
  */
 export const UmamiAnalytics = () => {
-  return process.env.NEXT_PUBLIC_UMAMI_ID && process.env.NODE_ENV === 'production' ? (
-    <Script src="https://um.baiwumm.com/script.js" data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID} />
-  ) : null;
+  const websiteId = process.env.NEXT_PUBLIC_UMAMI_ID;
+  const scriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
+  if (!websiteId || !scriptUrl || process.env.NODE_ENV !== "production") {
+    return null;
+  }
+  return <Script src={scriptUrl} data-website-id={websiteId} />;
 };
 
 /**
@@ -24,8 +27,9 @@ export const UmamiAnalytics = () => {
  */
 export const ClarityAnalytics = () => {
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      clarity.init(process.env.NEXT_PUBLIC_CLARITY_ID!);
+    const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
+    if (process.env.NODE_ENV === "production" && clarityId) {
+      clarity.init(clarityId);
     }
   }, []);
 

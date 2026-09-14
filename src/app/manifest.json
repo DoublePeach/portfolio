@@ -1,19 +1,13 @@
 {
-  "name": "白雾茫茫丶",
-  "short_name": "Portfolio",
-  "description": "一名扎根深圳的前端新手程序员，在互联网行业深耕多年，从最初的兴趣驱动到如今的职业探索，始终保持着对技术的敬畏与热爱",
+  "name": "郝桃桃 · Tovin Portfolio",
+  "short_name": "Tovin",
+  "description": "AI Native Coder · 企业 AI Agent 与 RAG 工程化落地",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "theme_color": "#000000",

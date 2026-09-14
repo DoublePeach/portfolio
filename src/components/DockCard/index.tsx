@@ -1,8 +1,6 @@
 "use client"
 
-import { House, Mail, Moon, Sun } from "lucide-react"
-import { AnimatePresence, motion } from 'motion/react';
-import Image from "next/image";
+import { Award, BookOpen, House, Mail, Moon, Phone, Sun } from "lucide-react"
 import Link from "next/link"
 import { useTheme } from "next-themes";
 import { type ReactNode } from 'react'
@@ -13,56 +11,57 @@ import {
   TooltipTrigger
 } from "@/components/animate-ui/components/animate/tooltip"
 import { RippleButton } from "@/components/animate-ui/components/buttons/ripple"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/animate-ui/components/radix/popover";
-import {
-  type Resolved,
-  type ThemeSelection,
-  ThemeToggler as ThemeTogglerPrimitive
-} from '@/components/animate-ui/primitives/effects/theme-toggler';
+import { useHonorsDialog } from "@/components/HonorsDialog/context";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { Separator } from "@/components/ui/separator";
 import { THEME_MODE } from '@/enums';
-import { GithubIcon, JuejinIcon, WechatIcon } from '@/lib/icons';
+import { GithubIcon } from '@/lib/icons';
 import pkg from '#/package.json';
 
-type Social = {
+type SocialLink = {
   name: string;
   url: string;
   icon: ReactNode;
 }
 
-type Wechat = {
-  name: string;
-  image: string;
-}
-
+/** 底部 Dock：首页、荣誉、博客、GitHub、邮箱、电话与主题切换 */
 export default function DockCard() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  const isDark = theme === THEME_MODE.DARK;
+  const { resolvedTheme, setTheme } = useTheme();
+  const { openHonors } = useHonorsDialog();
+  const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME || pkg.author.github;
 
-  const socials: Social[] = [
+  /**
+   * 切换明暗主题
+   * 不依赖条件渲染图标，避免 SSR/CSR hydration 不一致
+   */
+  const handleToggleTheme = () => {
+    const nextTheme = resolvedTheme === THEME_MODE.DARK ? THEME_MODE.LIGHT : THEME_MODE.DARK;
+    setTheme(nextTheme);
+  };
+
+  const socialLinks: SocialLink[] = [
     {
-      name: "GitHub",
-      url: `https://github.com/${pkg.author.name}`,
-      icon: <GithubIcon />
+      name: "技术博客",
+      url: pkg.author.url,
+      icon: <BookOpen />
     },
     {
-      name: "掘金",
-      url: 'https://juejin.cn/user/1917147257534279',
-      icon: <JuejinIcon />
+      name: "GitHub",
+      url: `https://github.com/${githubUsername}`,
+      icon: <GithubIcon />
     },
     {
       name: "Email",
       url: `mailto:${pkg.author.email}`,
       icon: <Mail />
+    },
+    {
+      name: "电话",
+      url: `tel:${pkg.author.phone}`,
+      icon: <Phone />
     }
   ]
 
-  const wechat: Wechat[] = [
-    { name: "微信", image: '/wechat.jpg' },
-    { name: "公众号", image: '/wechatOA.jpg' },
-    { name: "小程序", image: '/app.jpg' }
-  ]
   return (
     <div className="fixed inset-x-0 bottom-2 z-30 mx-auto flex origin-bottom h-full max-h-12">
       <div className="fixed bottom-0 inset-x-0 h-14 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
@@ -70,42 +69,41 @@ export default function DockCard() {
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href='https://baiwumm.com' aria-label="主页" target="_blank">
+              <Link href="/" aria-label="首页">
                 <RippleButton variant="ghost" className="rounded-full" size='icon'>
                   <House />
                 </RippleButton>
               </Link>
             </TooltipTrigger>
             <TooltipContent>
-              <p>博客</p>
+              <p>作品集首页</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <RippleButton
+                variant="ghost"
+                className="rounded-full"
+                size='icon'
+                aria-label="校园荣誉"
+                onClick={openHonors}
+              >
+                <Award />
+              </RippleButton>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>校园荣誉</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
         <Separator orientation="vertical" className="h-full" />
-        <DockIcon>
-          <Popover>
-            <PopoverTrigger asChild>
-              <RippleButton variant="ghost" className="rounded-full" size='icon'>
-                <WechatIcon />
-              </RippleButton>
-            </PopoverTrigger>
-            <PopoverContent className="p-2">
-              <div className="grid grid-cols-3 gap-1">
-                {wechat.map(({ name, image }, index) => (
-                  <div key={index} className="flex flex-col items-center justify-center text-xs text-muted-foreground">
-                    <Image src={image} width={80} height={80} alt={name} />
-                    <p>{name}</p>
-                  </div>
-                ))}
-              </div>
-            </PopoverContent>
-          </Popover>
-        </DockIcon>
-        {socials.map(({ name, url, icon }) => (
+        {socialLinks.map(({ name, url, icon }) => (
           <DockIcon key={name}>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link href={url} aria-label={name} target="_blank">
+                <Link href={url} aria-label={name} target="_blank" rel="noopener noreferrer">
                   <RippleButton variant="ghost" className="rounded-full" size='icon'>
                     {icon}
                   </RippleButton>
@@ -119,55 +117,26 @@ export default function DockCard() {
         ))}
         <Separator orientation="vertical" className="h-full" />
         <DockIcon>
-          <ThemeTogglerPrimitive
-            theme={theme as ThemeSelection}
-            resolvedTheme={resolvedTheme as Resolved}
-            setTheme={setTheme}
-            direction='ltr'
-          >
-            {({ toggleTheme }) => (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <RippleButton
-                    aria-label="ThemeToggle"
-                    variant="ghost"
-                    className="rounded-full"
-                    size='icon'
-                    onClick={() => toggleTheme(isDark ? THEME_MODE.LIGHT : THEME_MODE.DARK)}
-                  >
-                    <AnimatePresence mode="wait" initial={false}>
-                      {isDark ? (
-                        <motion.div
-                          key="moon"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.2, ease: 'easeInOut' }}
-                          className="text-neutral-800 dark:text-neutral-200"
-                        >
-                          <Moon className="h-[1.2rem] w-[1.2rem]" />
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="sun"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.2, ease: 'easeInOut' }}
-                          className="text-neutral-800 dark:text-neutral-200"
-                        >
-                          <Sun className="h-[1.2rem] w-[1.2rem]" />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </RippleButton>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>主题模式</p>
-                </TooltipContent>
-              </Tooltip>
-            )}
-          </ThemeTogglerPrimitive>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <RippleButton
+                aria-label="ThemeToggle"
+                variant="ghost"
+                className="rounded-full"
+                size='icon'
+                onClick={handleToggleTheme}
+              >
+                {/* 日月图标同时存在，用 CSS dark: 切换，保证服务端与客户端 DOM 一致 */}
+                <span className="relative inline-flex h-[1.2rem] w-[1.2rem] items-center justify-center">
+                  <Sun className="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                </span>
+              </RippleButton>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>主题模式</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
       </Dock>
     </div>

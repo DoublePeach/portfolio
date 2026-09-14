@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <text x="80" y="280" fill="#ffffff" font-size="72" font-family="system-ui,sans-serif" font-weight="700">ÝCC</text>
+  <text x="80" y="360" fill="#a1a1aa" font-size="36" font-family="system-ui,sans-serif">AI Agent · RAG · zý=0</text>
+  <rect x="80" y="400" width="320" height="8" rx="4" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop stop-color="#A97CF8"/>
+      <stop offset="0.5" stop-color="#F38CB8"/>
+      <stop offset="1" stop-color="#FDCC92"/>
+    </linearGradient>
+  </defs>
+</svg>

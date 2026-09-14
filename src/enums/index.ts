@@ -18,15 +18,15 @@ export const THEME_MODE = Enum({
 });
 
 /**
- * @description: Section
+ * @description: 页面锚点区块
  */
 export const SECTION = Enum({
   HERO: { value: 'hero', label: '作者' },
   ABOUT: { value: 'about', label: '关于' },
-  ACTIVITY: { value: 'github-activity', label: 'Github 贡献日历' },
   WORK: { value: 'work', label: '工作经历' },
-  EDUCATION: { value: 'education', label: '教育经历' },
+  EDUCATION: { value: 'education', label: '教育背景' },
   SKILLS: { value: 'skills', label: '专业技能' },
-  PROJECTS: { value: 'projects', label: '个人作品' },
-  POSTS: { value: 'posts', label: '近期文章' },
+  PROJECTS: { value: 'projects', label: '项目经历' },
+  HONORS: { value: 'honors', label: '校园荣誉' },
+  BLOG: { value: 'blog', label: '技术博客' },
 });
